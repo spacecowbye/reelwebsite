@@ -11,10 +11,9 @@ import { SITE_TITLE } from '../consts';
 <header class="main-header">
 	<div class="header-inner">
 		<a href="/" class="logo-block">
-			<img src="/logo.png" alt="Deepa's Logo" class="brand-logo" />
 			<div class="brand-center">
 				<span class="brand-name">Deepa's</span>
-				<span class="brand-subtitle">Customized Silver Jewellery</span>
+				<span class="brand-tagline">CUSTOMIZED SILVER JEWELLERY</span>
 			</div>
 		</a>
 
@@ -46,12 +45,14 @@ import { SITE_TITLE } from '../consts';
 		position: sticky;
 		top: 0;
 		z-index: 100;
+		padding-top: 0;
+		padding-bottom: 0;
 	}
 
 	.header-inner {
 		max-width: 1200px;
 		margin: 0 auto;
-		padding: 1em;
+		padding: 0;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -67,43 +68,13 @@ import { SITE_TITLE } from '../consts';
 	}
 
 	.brand-logo {
-		height: 48px;
-		width: 48px;
-		border-radius: 50%;
-		object-fit: cover;
-		box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-		background: #fff;
-	}
-
-	.brand-center {
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		text-align: center;
-	}
-
-	.brand-name {
-		font-family: 'Great Vibes', cursive;
-		font-size: 2.5em;
-		color: #111;
-		font-weight: 400;
-		letter-spacing: 1px;
-		margin-left: 0;
-		white-space: nowrap;
+		height: 160px;
+		width: auto;
+		object-fit: contain;
+		background: none;
+		border-radius: 0;
+		box-shadow: none;
 		display: block;
-	}
-
-	.brand-subtitle {
-		font-family: 'Montserrat', sans-serif;
-		font-size: 0.85em;
-		color: #888;
-		font-weight: 400;
-		letter-spacing: 1px;
-		margin-top: 0.1em;
-		margin-left: 0;
-		text-transform: none;
-		opacity: 0.85;
 	}
 
 	.nav-menu {
@@ -154,20 +125,70 @@ import { SITE_TITLE } from '../consts';
 		.header-inner {
 			flex-direction: column;
 			align-items: center;
-			gap: 1em;
+			gap: 0.3em;
+			padding: 0.5em 0 0.2em 0;
 		}
 		.nav-menu {
 			justify-content: center;
+			margin-top: 0.2em;
+			margin-bottom: 0.2em;
 		}
 		.brand-logo {
-			height: 40px;
-			width: 40px;
+			height:64px;
+			width: auto;
+		}
+	}
+
+	.brand-center {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: center;
+		text-align: left;
+		margin-left: 0.5em;
+		margin-top: 1.2em;
+		margin-bottom: 1.2em;
+	}
+
+	.brand-name {
+		font-family: 'Great Vibes', cursive;
+		font-size: 4em;
+		color: #444;
+		font-weight: 400;
+		line-height: 1.05;
+		margin-bottom: 0.1em;
+		white-space: nowrap;
+		display: block;
+	}
+
+	.brand-tagline {
+		font-family: 'Playfair Display', serif;
+		font-size: 0.75em;
+		color: #888;
+		font-weight: 400;
+		letter-spacing: 0.18em;
+		text-transform: uppercase;
+		line-height: 1.2;
+		margin-left: 0.08em;
+		margin-top: 0;
+		text-align: left;
+		display: block;
+		opacity: 0.8;
+	}
+
+	@media (max-width: 720px) {
+		.brand-center {
+			align-items: center;
+			text-align: center;
+			margin-left: 0;
+			margin-top: 0.8em;
+			margin-bottom: 0.8em;
 		}
 		.brand-name {
-			font-size: 1.7em;
+			font-size: 2.2em;
 		}
-		.brand-subtitle {
-			font-size: 0.7em;
+		.brand-tagline {
+			font-size: 0.6em;
 		}
 	}
 </style>

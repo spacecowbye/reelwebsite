@@ -1,0 +1,49 @@
+---
+import ReelHero from './ReelHero.astro';
+
+const {
+  thumbnailUrl = '/reel-thumb.jpg',
+  caption = 'This is a sample caption for the latest reel.',
+  items = [],
+} = Astro.props;
+---
+
+<section class="latest-reel-section">
+  <h2 class="latest-reel-title">Latest Reel</h2>
+  <ReelHero thumbnailUrl={thumbnailUrl} caption={caption} />
+  <!-- <ReelItemsCarousel items={items} /> -->
+</section>
+
+<style>
+.latest-reel-section {
+  margin: 0 auto 2.5em auto;
+  max-width: 900px;
+  padding: 0 1em 2em 1em;
+  background: var(--pastel-cream, #FFF5EE);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(96, 115, 159, 0.07);
+  border: 1.5px solid #ececec;
+}
+
+.latest-reel-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6em;
+  font-weight: 700;
+  color: #a66b35;
+  text-align: center;
+  letter-spacing: 0.05em;
+  margin: 1.5em 0 1.8em 0;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .latest-reel-section {
+    padding: 0 0.2em 1.2em 0.2em;
+    border-radius: 10px;
+  }
+  .latest-reel-title {
+    font-size: 1.3em;
+    margin: 1em 0 1.2em 0;
+  }
+}
+</style>

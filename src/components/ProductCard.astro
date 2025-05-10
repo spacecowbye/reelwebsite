@@ -1,0 +1,88 @@
+---
+// Props: imageUrl, price, status
+const { imageUrl = '/product-placeholder.jpg', price = '₹2,999', status } = Astro.props;
+---
+<div class="product-card">
+  <div class="product-image-wrapper">
+    <img src={imageUrl} alt="Jewelry Item" class="product-image" />
+    {status === 'Sold Out' && <div class="sold-out-overlay">Sold Out</div>}
+  </div>
+  <div class="product-price-bar">{price}</div>
+</div>
+
+<style>
+.product-card {
+  width: 240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  border-radius: 28px;
+  box-shadow: 0 6px 32px 0 rgba(96,115,159,0.13);
+  overflow: hidden;
+  margin: 0 auto;
+  border: 2.5px solid var(--pastel-pink, #FFE4E1);
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+.product-card:hover {
+  box-shadow: 0 12px 36px 0 rgba(96,115,159,0.18);
+  border-color: var(--pastel-gold, #F5DEB3);
+}
+.product-image-wrapper {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--pastel-pink, #FFE4E1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.product-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+  display: block;
+}
+.sold-out-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: rgba(0,0,0,0.65);
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.1em;
+  font-weight: 600;
+  padding: 0.5em 1.2em;
+  border-radius: 12px;
+  letter-spacing: 0.08em;
+  z-index: 2;
+}
+.product-price-bar {
+  width: 100%;
+  background: rgba(255,255,255,0.55);
+  color: #a67c52;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 1.18em;
+  font-weight: 600;
+  text-align: center;
+  padding: 0.7em 0;
+  border-top: 1.5px solid #ececec;
+  letter-spacing: 0.04em;
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  box-shadow: 0 2px 8px 0 rgba(96,115,159,0.07);
+}
+@media (max-width: 600px) {
+  .product-card {
+    width: 160px;
+    border-radius: 16px;
+  }
+  .product-price-bar {
+    font-size: 1em;
+    padding: 0.45em 0;
+  }
+}
+</style> 
