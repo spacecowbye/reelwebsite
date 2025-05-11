@@ -1,0 +1,161 @@
+---
+// ReelBlock.astro
+// Displays a single reel collection with its video and product carousel
+
+// Import components
+import ReelThumbnail from './ReelThumbnail.astro';
+import ReelCarousel from './ReelCarousel.astro';
+
+// Define props
+const { 
+  id, 
+  title, 
+  date, 
+  reelUrl, 
+  thumbnailSrc, 
+  embedCode, 
+  products,
+  isLatest = false
+} = Astro.props;
+
+// Format date
+const formattedDate = new Date(date).toLocaleDateString('en-IN', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+---
+
+<div class={`reel-block ${isLatest ? 'latest' : ''}`} id={id}>
+  <div class="reel-block-header">
+    <h3 class="reel-title">{title}</h3>
+    <p class="reel-date">Released: {formattedDate}</p>
+  </div>
+  
+  <div class="reel-content">
+    <div class="reel-video-container">
+      <ReelThumbnail 
+        thumbnailSrc={thumbnailSrc}
+        embedCode={embedCode}
+        reelUrl={reelUrl}
+      />
+      
+      <div class="reel-cta">
+        <a href={reelUrl} target="_blank" rel="noopener noreferrer" class="view-on-instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+          View on Instagram
+        </a>
+      </div>
+    </div>
+    
+    <div class="products-container">
+      <h4 class="products-title">Collection Pieces</h4>
+      <ReelCarousel products={products} />
+    </div>
+  </div>
+</div>
+
+<style>
+  .reel-block {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .reel-block.latest {
+    background: linear-gradient(rgba(255,255,255,0.05), transparent);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+  
+  .reel-block-header {
+    text-align: center;
+  }
+  
+  .reel-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+  }
+  
+  .reel-date {
+    font-size: 0.9rem;
+    color: #b0b0b0;
+    font-style: italic;
+  }
+  
+  .reel-content {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 2rem;
+    align-items: start;
+  }
+  
+  .reel-video-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .reel-cta {
+    margin-top: 1rem;
+  }
+  
+  .view-on-instagram {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    background-color: #E1306C;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+  }
+  
+  .view-on-instagram:hover {
+    background-color: #C13584;
+  }
+  
+  .products-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .products-title {
+    font-size: 1.2rem;
+    color: #d4af37;
+    margin-bottom: 0.5rem;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 992px) {
+    .reel-content {
+      grid-template-columns: 1fr;
+    }
+    
+    .reel-video-container {
+      max-width: 500px;
+      margin: 0 auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .reel-block {
+      gap: 1.5rem;
+    }
+    
+    .reel-title {
+      font-size: 1.5rem;
+    }
+  }
+</style>

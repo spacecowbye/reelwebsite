@@ -1,0 +1,217 @@
+---
+// ReelSection.astro
+// The main content section that displays all jewelry reels in a stacked layout
+// Each reel collection is presented with its video and products
+
+// Import components
+import ReelBlock from './ReelBlock.astro';
+
+// Define props and fetch data
+// In a real implementation, you would fetch this data from a CMS or database
+const { reelsData } = Astro.props;
+
+// Example data structure if none is provided
+const defaultReelsData = [
+  {
+    id: "reel-001",
+    title: "Summer Collection 2025",
+    date: "May 5, 2025",
+    reelUrl: "https://www.instagram.com/reel/xyz123",
+    thumbnailSrc: "/images/reels/summer-2025-thumb.jpg",
+    embedCode: "<iframe src='https://www.instagram.com/p/ABC123/embed' allowfullscreen></iframe>",
+    products: [
+      {
+        id: "prod-001",
+        name: "Silver Lotus Pendant",
+        price: 3500,
+        originalPrice: 3800,
+        currency: "INR", 
+        image: "/images/products/lotus-pendant.jpg",
+        isSoldOut: false
+      },
+      {
+        id: "prod-002",
+        name: "Peacock Earrings",
+        price: 2800,
+        originalPrice: null,
+        currency: "INR",
+        image: "/images/products/peacock-earrings.jpg",
+        isSoldOut: true
+      },
+      // More products...
+    ]
+  },
+  {
+    id: "reel-002",
+    title: "Spring Elegance",
+    date: "April 10, 2025",
+    reelUrl: "https://www.instagram.com/reel/abc456",
+    thumbnailSrc: "/images/reels/spring-elegance-thumb.jpg",
+    embedCode: "<iframe src='https://www.instagram.com/p/DEF456/embed' allowfullscreen></iframe>",
+    products: [
+      {
+        id: "prod-003",
+        name: "Floral Silver Bracelet",
+        price: 4200,
+        originalPrice: 4500,
+        currency: "INR",
+        image: "/images/products/floral-bracelet.jpg",
+        isSoldOut: false
+      },
+      // More products...
+    ]
+  }
+  // More reels...
+];
+
+// Use the provided data or fallback to default
+const reels = reelsData || defaultReelsData;
+---
+
+<section class="reel-section" id="collections">
+  <div class="reel-section-container">
+    <h2 class="reel-section-title">Our Collections</h2>
+    <p class="reel-section-description">
+      Discover our handcrafted silver jewelry, each piece lovingly made and revealed first on Instagram.
+      Browse our latest designs below or explore our archive of past collections.
+    </p>
+    
+    <div class="reels-container">
+      {reels.map((reel, index) => (
+        <div class={`reel-wrapper ${index === 0 ? 'latest' : ''}`}>
+          {index === 0 && <div class="new-badge">Latest Collection</div>}
+          <ReelBlock 
+            id={reel.id}
+            title={reel.title}
+            date={reel.date}
+            reelUrl={reel.reelUrl}
+            thumbnailSrc={reel.thumbnailSrc}
+            embedCode={reel.embedCode}
+            products={reel.products}
+            isLatest={index === 0}
+          />
+          
+          {index !== reels.length - 1 && <div class="reel-divider"></div>}
+        </div>
+      ))}
+    </div>
+    
+    <div class="archive-notice">
+      <p>Looking for older collections? Visit our <a href="/archive" class="archive-link">Living Archive</a> to explore our artistic journey.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .reel-section {
+    background-color: #121212; /* Light black background as requested */
+    color: #fff;
+    padding: 4rem 0;
+    width: 100%;
+  }
+  
+  .reel-section-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+  
+  .reel-section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #d4af37; /* Gold accent color */
+  }
+  
+  .reel-section-description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 3rem auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: #e0e0e0;
+  }
+  
+  .reels-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5rem;
+  }
+  
+  .reel-wrapper {
+    position: relative;
+  }
+  
+  .reel-wrapper.latest {
+    padding-top: 1.5rem;
+  }
+  
+  .new-badge {
+    position: absolute;
+    top: -10px;
+    right: 50px;
+    background-color: #d4af37;
+    color: #121212;
+    padding: 0.25rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    z-index: 10;
+  }
+  
+  .reel-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.2), transparent);
+    margin-top: 3rem;
+  }
+  
+  .archive-notice {
+    margin-top: 4rem;
+    text-align: center;
+    font-style: italic;
+    color: #a0a0a0;
+  }
+  
+  .archive-link {
+    color: #d4af37;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+  }
+  
+  .archive-link:hover {
+    color: #f5d76e;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .reel-section {
+      padding: 3rem 0;
+    }
+    
+    .reel-section-title {
+      font-size: 2rem;
+    }
+    
+    .reel-section-description {
+      font-size: 1rem;
+    }
+    
+    .reels-container {
+      gap: 4rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .reel-section-title {
+      font-size: 1.75rem;
+    }
+    
+    .new-badge {
+      right: 20px;
+      font-size: 0.75rem;
+      padding: 0.2rem 0.75rem;
+    }
+  }
+</style>
