@@ -47,7 +47,6 @@ export async function getJewelryReels(): Promise<JewelryReel[]> {
             imageUrl: (item.get('Image URL') as string) || '',
             price: item.get('Price') as number,
             status: (item.get('Status') as 'Available' | 'Sold Out') || 'Available',
-            notes: (item.get('Notes') as string) || '',
             dropIds: item.get('Drop') as string[] | undefined,
             reelUrls: item.get('Reel Video URL (from Drop)') as string[] | undefined,
           }));
@@ -57,10 +56,8 @@ export async function getJewelryReels(): Promise<JewelryReel[]> {
           dropId: reel.get('Drop ID') as number,
           reelUrl: (reel.get('Reel Video URL') as string) || '',
           datePosted: reel.get('Date Posted') as string,
-          caption: (reel.get('Caption') as string) || '',
           itemIds: linkedItemIds || [],
           thumbnail: (reel.get('Thumbnail') as string) || '',
-          items,
         };
 
         return jewelryReel;

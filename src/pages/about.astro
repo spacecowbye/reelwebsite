@@ -1,22 +1,35 @@
 ---
-// pages/test-carousel.astro
+// pages/test-reel.astro
 import Layout from '../layouts/BlogPost.astro';
-import ReelCarousel from '../components/ReelCarousel.astro';
+import ReelBlock from '../components/ReelBlock.astro';
+import type { Reel } from '../types';
 
-const products = Array.from({ length: 6 }, (_, i) => ({
+const dummyProducts = Array.from({ length: 6 }, (_, i) => ({
+  id: `item-${i + 1}`,
   name: `Elegant Gold Ring #${i + 1}`,
   imageUrl: '/testImage.png',
   price: Math.floor(Math.random() * 10000),
-  currency: 'INR',
-  isSoldOut: false,
+  currency: 'INR', // Fix: explicitly set currency to 'INR' to match the type
+  isSoldOut: i % 2 === 0, // alternate availability
 }));
+
+const dummyReel: Reel = {
+  dropId: 1,
+  reelUrl: 'https://www.instagram.com/reel/CRW2aLwhgk2/',
+  datePosted: '2025-05-11',
+  thumbnail: '/reel-thumb.jpg',
+  products: dummyProducts,
+  profileLink: 'https://www.instagram.com/deepas_silver_jewelry/',
+  authorName: 'deepas_silver_jewelry',
+  profileImage: '/instadp.jpeg',
+};
 ---
 
 <Layout
-  title="Component Test – ProductCard Carousel"
-  description="Testing the SimpleProductCarousel component layout and behavior"
-  pubDate={new Date('August 08 2021')}
+  title="Component Test – ReelBlock"
+  description="Testing the ReelBlock component with dummy data"
+  pubDate={new Date('2025-05-11')}
   heroImage="/blog-placeholder-about.jpg"
 >
-  <ReelCarousel products={products} />
+  <ReelBlock reel={dummyReel} />
 </Layout>

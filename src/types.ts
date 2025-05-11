@@ -7,38 +7,34 @@ export interface JewelryItem {
     imageUrl: string;
     price: number;
     status: 'Available' | 'Sold Out';
-    notes?: string;
     dropIds?: string[];
-    reelUrls?: string[];
+    reelUrl?: string[];
   }
   
   export interface JewelryReel {
     dropId: number;
     reelUrl: string;
     datePosted: string;
-    caption: string;
     itemIds?: string[];
     thumbnail: string;
-    items: JewelryItem[]; // If you include embedded items
   }
-  // Clean, camelCase types for use in components
-  export interface ProductItemClean {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: number;
-    status: 'Available' | 'Sold Out';
-    notes?: string;
-    dropIds?: string[];
-    reelUrls?: string[];
-  }
-  
-  export interface ReelClean {
+  export interface Reel {
     dropId: number;
     reelUrl: string;
     datePosted: string;
-    caption: string;
-    itemIds?: string[];
     thumbnail: string;
-  }
   
+    products: {
+      id: string;
+      name: string;
+      imageUrl: string;
+      price: number;
+      currency: string; // Changed from 'INR' to string
+      isSoldOut: boolean;
+    }[];
+  
+    // Changed from literal strings to regular strings
+    profileLink: string;
+    authorName: string;
+    profileImage: string;
+  }

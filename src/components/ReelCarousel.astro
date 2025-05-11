@@ -2,237 +2,236 @@
 // EnhancedProductCarousel.astro
 import ProductCard from './ProductCard.astro';
 
-// Accept an array of products
 const { products = [] } = Astro.props;
 ---
 <div class="enhanced-carousel">
-    <button class="arrow left" id="prevBtn" aria-label="Previous product">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="15 18 9 12 15 6"></polyline>
-      </svg>
-    </button>
-  
-    <div class="carousel-wrapper">
-      <div class="carousel-container" id="carouselContainer">
-        <div class="carousel-track" id="carouselTrack">
-          {products.map((product: any, index: number) => (
-            <div class="carousel-item" data-index={index}>
-              <ProductCard 
-                name={product.name}
-                imageUrl={product.imageUrl}
-                price={product.price}
-                currency={product.currency || 'INR'}
-                isSoldOut={product.isSoldOut}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-  
-      <div class="pagination">
-        {products.map((_: any, index: number) => (
-          <button 
-            class="pagination-dot" 
-            data-index={index} 
-            aria-label={`Go to product ${index + 1}`}
-          ></button>
+  <button class="arrow left" id="prevBtn" aria-label="Previous product">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="15 18 9 12 15 6"></polyline>
+    </svg>
+  </button>
+
+  <div class="carousel-wrapper">
+    <div class="carousel-container" id="carouselContainer">
+      <div class="carousel-track" id="carouselTrack">
+        {products.map((product: any, index: number) => (
+          <div class="carousel-item" data-index={index}>
+            <ProductCard 
+              name={product.name}
+              imageUrl={product.imageUrl}
+              price={product.price}
+              currency={product.currency || 'INR'}
+              isSoldOut={product.isSoldOut}
+            />
+          </div>
         ))}
       </div>
     </div>
-  
-    <button class="arrow right" id="nextBtn" aria-label="Next product">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </button>
+
+    <div class="pagination">
+      {products.map((_: any, index: number) => (
+        <button 
+          class="pagination-dot" 
+          data-index={index} 
+          aria-label={`Go to product ${index + 1}`}
+        ></button>
+      ))}
+    </div>
   </div>
-  
-  <style>
-    .enhanced-carousel {
-      position: relative;
-      width: 100%;
-      max-width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 10px;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    }
-  
-    .carousel-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-  
-    .carousel-container {
-      width: 320px;
-      overflow: hidden;
-      position: relative;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-    }
-  
-    .carousel-track {
-      display: flex;
-      transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
-      width: 100%;
-    }
-  
-    .carousel-item {
-      flex: 0 0 100%;
-      width: 100%;
-      opacity: 0.7;
-      transform: scale(0.9);
-      transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
-    }
-  
-    .carousel-item.active {
-      opacity: 1;
-      transform: scale(1);
-    }
-  
+
+  <button class="arrow right" id="nextBtn" aria-label="Next product">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </button>
+</div>
+
+<style>
+  .enhanced-carousel {
+    position: relative;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0 10px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  .carousel-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .carousel-container {
+    width: 300px;
+    overflow: hidden;
+    position: relative;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+    width: 100%;
+  }
+
+  .carousel-item {
+    flex: 0 0 100%;
+    width: 100%;
+    opacity: 0.7;
+    transform: scale(0.9);
+    transition: all 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  .carousel-item.active {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #ffffff;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    color: #555;
+    transition: all 0.2s ease;
+  }
+
+  .arrow.left {
+    left: -18px;
+  }
+
+  .arrow.right {
+    right: -18px;
+  }
+
+  .arrow:hover {
+    background: #f0f0f0;
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+  }
+
+  .arrow:active {
+    transform: translateY(-50%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  .pagination {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+    background: transparent;
+  }
+
+  .pagination-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    border: none;
+    background-color: rgba(0, 0, 0, 0.2);
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .pagination-dot.active {
+    background-color: #555;
+    width: 18px;
+    border-radius: 4px;
+  }
+
+  @media (min-width: 768px) {
     .arrow {
-      background: #ffffff;
-      border: none;
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      z-index: 2;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      color: #555;
+      width: 40px;
+      height: 40px;
     }
-  
-    .arrow:hover {
-      background: #f0f0f0;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 14px rgba(0, 0, 0, 0.2);
+
+    .arrow.left {
+      left: -24px;
     }
-  
-    .arrow:active {
-      transform: translateY(0);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+    .arrow.right {
+      right: 24px;
     }
-  
-    .left {
-      margin-right: 15px;
-    }
-  
-    .right {
-      margin-left: 15px;
-    }
-  
-    .pagination {
-      display: flex;
-      justify-content: center;
-      gap: 8px;
-      margin-top: 12px;
-      background: transparent;
-      box-shadow: none;
-      border: none;
-    }
-  
+
     .pagination-dot {
       width: 8px;
       height: 8px;
-      border-radius: 50%;
-      border: none;
-      background-color: rgba(0, 0, 0, 0.2);
-      padding: 0;
-      cursor: pointer;
-      transition: all 0.3s ease;
     }
-  
+
     .pagination-dot.active {
-      background-color: #555;
       width: 24px;
-      border-radius: 4px;
     }
-  
-    @media (max-width: 480px) {
-      .arrow {
-        width: 40px;
-        height: 40px;
-      }
-  
-      .left {
-        margin-right: 8px;
-      }
-  
-      .right {
-        margin-left: 8px;
-      }
-  
-      .pagination-dot {
-        width: 6px;
-        height: 6px;
-      }
-  
-      .pagination-dot.active {
-        width: 18px;
-      }
-    }
-  </style>
-  
-  <script>
-    document.addEventListener('DOMContentLoaded', () => {
-      const track = document.getElementById('carouselTrack');
-      const items = document.querySelectorAll('.carousel-item');
-      const dots = document.querySelectorAll('.pagination-dot');
-      const prevBtn = document.getElementById('prevBtn');
-      const nextBtn = document.getElementById('nextBtn');
-  
-      if (items.length === 0 || !track) return;
-  
-      let currentIndex = 0;
-  
-      updateCarousel(0);
-  
-      function updateCarousel(index: number) {
-        if (index < 0) index = items.length - 1;
-        if (index >= items.length) index = 0;
-  
-        items.forEach((item, i) => {
-          item.classList.toggle('active', i === index);
-        });
-  
-        dots.forEach((dot, i) => {
-          dot.classList.toggle('active', i === index);
-        });
-  
-        (track as HTMLElement).style.transform = `translateX(${-index * 100}%)`;
-        currentIndex = index;
-      }
-  
-      prevBtn?.addEventListener('click', () => updateCarousel(currentIndex - 1));
-      nextBtn?.addEventListener('click', () => updateCarousel(currentIndex + 1));
-  
-      dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => updateCarousel(index));
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('carouselTrack');
+    const items = document.querySelectorAll('.carousel-item');
+    const dots = document.querySelectorAll('.pagination-dot');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    if (items.length === 0 || !track) return;
+
+    let currentIndex = 0;
+
+    updateCarousel(0);
+
+    function updateCarousel(index: number) {
+      if (index < 0) index = items.length - 1;
+      if (index >= items.length) index = 0;
+
+      items.forEach((item, i) => {
+        item.classList.toggle('active', i === index);
       });
-  
-      let touchStartX = 0;
-      let touchEndX = 0;
-      const container = document.getElementById('carouselContainer');
-  
-      container?.addEventListener('touchstart', (e) => {
-        touchStartX = e.touches[0].clientX;
-      }, { passive: true });
-  
-      container?.addEventListener('touchmove', (e) => {
-        touchEndX = e.touches[0].clientX;
-      }, { passive: true });
-  
-      container?.addEventListener('touchend', () => {
-        const diff = touchStartX - touchEndX;
-        if (Math.abs(diff) > 30) {
-          diff > 0 ? updateCarousel(currentIndex + 1) : updateCarousel(currentIndex - 1);
-        }
-      }, { passive: true });
+
+      dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+      });
+
+      (track as HTMLElement).style.transform = `translateX(${-index * 100}%)`;
+      currentIndex = index;
+    }
+
+    prevBtn?.addEventListener('click', () => updateCarousel(currentIndex - 1));
+    nextBtn?.addEventListener('click', () => updateCarousel(currentIndex + 1));
+
+    dots.forEach((dot, index) => {
+      dot.addEventListener('click', () => updateCarousel(index));
     });
-  </script>
+
+    let touchStartX = 0;
+    let touchEndX = 0;
+    const container = document.getElementById('carouselContainer');
+
+    container?.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    container?.addEventListener('touchmove', (e) => {
+      touchEndX = e.touches[0].clientX;
+    }, { passive: true });
+
+    container?.addEventListener('touchend', () => {
+      const diff = touchStartX - touchEndX;
+      if (Math.abs(diff) > 30) {
+        diff > 0 ? updateCarousel(currentIndex + 1) : updateCarousel(currentIndex - 1);
+      }
+    }, { passive: true });
+  });
+</script>
