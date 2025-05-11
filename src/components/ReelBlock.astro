@@ -24,15 +24,14 @@ const reel = (Astro.props as { reel: Reel }).reel;
     </div>
   </div>
 </div>
-
 <style>
   .reel-block {
     width: 100%;
     margin: 2rem 0;
     padding: 1.5rem;
-    background-color: #f9f9f9;
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    background-color: #fff;
   }
 
   .reel-container {
@@ -41,29 +40,9 @@ const reel = (Astro.props as { reel: Reel }).reel;
     gap: 2rem;
   }
 
-  .reel-thumbnail-section {
-    width: 100%;
-  }
-
+  .reel-thumbnail-section,
   .reel-carousel-section {
     width: 100%;
-  }
-
-  /* Responsive design */
-  @media (min-width: 768px) {
-    .reel-container {
-      flex-direction: row;
-      align-items: flex-start;
-      gap: 3rem;
-    }
-
-    .reel-thumbnail-section {
-      width: 35%;
-    }
-
-    .reel-carousel-section {
-      width: 65%;
-    }
   }
 
   @media (min-width: 1024px) {

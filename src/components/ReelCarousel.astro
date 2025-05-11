@@ -4,7 +4,7 @@ import ProductCard from './ProductCard.astro';
 
 const { products = [] } = Astro.props;
 ---
-<div class="enhanced-carousel">
+<div class="carousel-frame">
   <button class="arrow left" id="prevBtn" aria-label="Previous product">
     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
       <polyline points="15 18 9 12 15 6"></polyline>
@@ -47,14 +47,14 @@ const { products = [] } = Astro.props;
 </div>
 
 <style>
-  .enhanced-carousel {
+  .carousel-frame {
     position: relative;
-    width: 100%;
-    max-width: 100%;
     display: flex;
+    align-items: center;
     justify-content: center;
-    padding: 0 10px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    max-width: 100%;
+    width: fit-content;
+    margin: auto;
   }
 
   .carousel-wrapper {
@@ -110,11 +110,11 @@ const { products = [] } = Astro.props;
   }
 
   .arrow.left {
-    left: -18px;
+    left: -20px;
   }
 
   .arrow.right {
-    right: -18px;
+    right: -20px;
   }
 
   .arrow:hover {
@@ -151,30 +151,6 @@ const { products = [] } = Astro.props;
     background-color: #555;
     width: 18px;
     border-radius: 4px;
-  }
-
-  @media (min-width: 768px) {
-    .arrow {
-      width: 40px;
-      height: 40px;
-    }
-
-    .arrow.left {
-      left: -24px;
-    }
-
-    .arrow.right {
-      right: 24px;
-    }
-
-    .pagination-dot {
-      width: 8px;
-      height: 8px;
-    }
-
-    .pagination-dot.active {
-      width: 24px;
-    }
   }
 </style>
 
