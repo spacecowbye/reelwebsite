@@ -3,122 +3,69 @@ interface Props {
   reelLink?: string;
   authorName?: string;
   profileImage?: string;
+  reelImage?: string;
 }
 
 const {
   reelLink = "https://www.instagram.com/deepas_silver_jewelry/",
   authorName = "deepas_silver_jewelry",
-  profileImage = "/instadp.jpeg"
+  profileImage = "/instadp.jpeg",
+  reelImage = "/testImage.png",
 } = Astro.props;
 ---
 
-<div class="reel-section">
-  <a href={reelLink} class="reel-link" aria-label={`View jewelry reel by ${authorName}`}>
-    <div class="polaroid-frame">
-      <div class="reel-overlay">
-        <!-- Top-left profile info -->
-        <div class="usrProfile overlay-top-left">
-          <div class="uplogo">
-            <img src={profileImage} alt={authorName} />
-          </div>
-          <p>{authorName}</p>
-        </div>
+<a href={reelLink} class="reel-section" aria-label={`View jewelry reel by ${authorName}`}>
+  <img
+    src={reelImage}
+    alt={`Jewelry reel by ${authorName}`}
+    class="reel-item"
+    loading="lazy"
+  />
 
-        <!-- Right-side like and comment stats -->
-        <div class="overlay-right">
-          <div class="icon-block">
-            <img src="/like.png" alt="likes" class="icon" />
-            
-          </div>
-          <div class="icon-block">
-            <img src="/comment.png" alt="comments" class="icon" />
-            
-          </div>
-        </div>
-      </div>
-
-      <img
-        src="/testImage.png"
-        alt={`Jewelry reel by ${authorName}`}
-        class="reel-item"
-        loading="lazy"
-      />
+  <div class="profile-bar">
+    <div class="uplogo">
+      <img src={profileImage} alt={authorName} />
     </div>
-  </a>
-</div>
+    <p>{authorName}</p>
+  </div>
+</a>
 
 <style>
   .reel-section {
-  margin: 0 auto;
-  display: block;
-  position: relative;
-  width: 300px; /* slightly larger */
-  background: linear-gradient(145deg, #fdfdfd, #f4f4f4);
-  border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.reel-section:hover {
-  transform: translateY(-6px);
-}
-
-.polaroid-frame {
-  position: relative;
-  background: #fff;
-  padding: 0;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid #eee;
-}
-  .reel-link {
+    margin: 0 auto;
     display: block;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.05);
+    background: transparent;
     text-decoration: none;
-    color: #333;
-    cursor: pointer;
+    color: inherit;
   }
 
   .reel-item {
-  width: 100%;
-  height: 400px; /* slightly taller */
-  object-fit: cover;
-  display: block;
-  border-bottom: 2px solid #f2f2f2;
-}
-  .reel-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
     width: 100%;
-    height: 100%;
-    z-index: 2;
-    pointer-events: none;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+    display: block;
   }
 
-  .overlay-top-left {
-    position: absolute;
-    top: 8px;
-    left: 8px;
+  .profile-bar {
     display: flex;
     align-items: center;
-    gap: 6px;
-    background: rgba(0, 0, 0, 0.4);
-    padding: 6px 10px;
-    border-radius: 12px;
+    gap: 10px;
+    background: #000;
     color: white;
-    font-family: 'Cormorant Garamond', serif;
-    font-size: 13px;
+    padding: 10px 12px;
+    border-radius: 0 0 12px 12px;
   }
 
   .uplogo {
-    width: 28px;
-    height: 28px;
-    overflow: hidden;
+    width: 32px;
+    height: 32px;
     border-radius: 50%;
-    background: #fff;
+    overflow: hidden;
     flex-shrink: 0;
   }
 
@@ -128,85 +75,33 @@ const {
     object-fit: cover;
   }
 
-  .usrProfile p {
+  .profile-bar p {
     margin: 0;
-    font-size: 13px;
-    color: white;
+    font-size: 14px;
     font-weight: 500;
     letter-spacing: 0.3px;
-  }
-  .overlay-right {
-  position: absolute;
-  bottom: 30%;
-  right: 10px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 28px;
-}
-
-  .icon-block {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    font-size: 13px;
-    color: white;
-    font-family: 'Cormorant Garamond', serif;
-  }
-
-  .icon {
-    width: 22px;
-    height: 22px;
-    display: block;
   }
 
   @media (max-width: 480px) {
     .reel-section {
-      max-width: 260px;
+      max-width: 280px;
     }
 
     .reel-item {
-      height: 340px;
-    }
-
-    .overlay-top-left {
-      font-size: 12px;
-      padding: 6px 8px;
-    }
-
-    .overlay-right {
-      gap: 14px;
-    }
-
-    .icon-block {
-      font-size: 12px;
+      height: 360px;
     }
 
     .uplogo {
-      width: 24px;
-      height: 24px;
+      width: 28px;
+      height: 28px;
     }
 
-    .icon {
-      width: 18px;
-      height: 18px;
+    .profile-bar {
+      padding: 8px 10px;
     }
 
-    .usrProfile p {
-      font-size: 12px;
+    .profile-bar p {
+      font-size: 13px;
     }
-  }
-
-  @media (max-width: 480px) {
-  .reel-section {
-    max-width: 280px;
-    padding: 8px;
-  }
-
-  .reel-item {
-    height: 360px;
-  }
-}
   }
 </style>

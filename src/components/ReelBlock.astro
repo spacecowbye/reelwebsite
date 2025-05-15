@@ -1,53 +1,176 @@
 ---
 // src/components/ReelBlock.astro
-import ReelThumbnail from './ReelThumbnail.astro';
-import ReelCarousel from './ReelCarousel.astro';
-import type { Reel } from '../types';
+import ReelThumbnail from "./ReelThumbnail.astro";
+import ReelCarousel from "./ReelCarousel.astro";
+import type { Reel } from "../types";
 
 const reel = (Astro.props as { reel: Reel }).reel;
 ---
 
-<div class="reel-block">
+<div class="reel-block enhanced">
+  <div class="reel-header">
+    <a class="reel-link" href={reel.reelUrl} target="_blank" aria-label="Watch this reel. Opens in a new tab.">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+      </svg>
+      Watch This Reel
+    </a>
+  </div>
+
   <div class="reel-container">
-    <!-- Thumbnail section -->
     <div class="reel-thumbnail-section">
-      <ReelThumbnail 
-        reelLink={reel.reelUrl} 
-        authorName={reel.authorName} 
-        profileImage={reel.profileImage} 
+      <ReelThumbnail
+        reelLink={reel.reelUrl}
+        authorName={reel.authorName}
+        profileImage={reel.profileImage}
       />
     </div>
 
-    <!-- Carousel section -->
     <div class="reel-carousel-section">
       <ReelCarousel products={reel.products} />
     </div>
   </div>
 </div>
+
 <style>
-  .reel-block {
-    width: 100%;
-    margin: 2rem 0;
+  .reel-block.enhanced {
+    margin: 2rem 1rem; /* adds spacing on small screens */
+    background: linear-gradient(
+      180deg,
+      var(--pastel-pink),
+      var(--pastel-cream)
+    );
+    border: 1px solid var(--pastel-gold);
+    border-radius: 16px;
     padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-    background-color: #fff;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+    max-width: 600px;
+  }
+
+  .reel-block.enhanced:hover {
+    box-shadow: 0 8px 24px rgba(var(--gray), 0.15);
+  }
+
+  .reel-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem; /* Reduced margin for mobile */
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--pastel-gold);
+    position: relative;
+  }
+
+  .reel-link {
+    font-family: "Montserrat", sans-serif;
+    font-size: 1rem; /* Slightly smaller font on mobile */
+    font-weight: 700;
+    color: white;
+    text-decoration: none;
+    background: linear-gradient(135deg, var(--accent-dark, #e67e22), #f39c12);
+    padding: 0.75rem 1.25rem; /* Adjusted padding for mobile screens */
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Center content for better mobile appearance */
+    gap: 0.4rem; /* Reduced gap for mobile */
+    width: 85%; /* Take up most of the width on mobile for easy tapping */
+    max-width: 280px; /* Set max width */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    -webkit-tap-highlight-color: transparent; /* Remove default mobile tap highlight */
+    animation: mobile-pulse 3s infinite;
+  }
+
+  /* Simplified hover effects for mobile first */
+  .reel-link:hover,
+  .reel-link:focus,
+  .reel-link:active {
+    background: linear-gradient(135deg, #d35400, #e67e22);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Simplified animation for better mobile performance */
+  @keyframes mobile-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(230, 126, 34, 0.5);
+    }
+    70% {
+      box-shadow: 0 0 0 6px rgba(230, 126, 34, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(230, 126, 34, 0);
+    }
+  }
+
+  .reel-thumbnail-section img,
+  .reel-carousel-section img {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    object-fit: cover;
+    display: block;
+  }
+
+  .reel-thumbnail-section {
+    background: transparent;
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+  }
+
+  .reel-block.enhanced + .reel-block.enhanced {
+    margin-top: 3rem;
+  }
+
+  .author-name {
+    font-family: "Playfair Display", serif;
+    font-size: 1.5rem;
+    color: var(--accent-dark);
+    margin: 0;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
   }
 
   .reel-container {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 2rem; /* increase gap between thumbnail & carousel */
   }
 
-  .reel-thumbnail-section,
-  .reel-carousel-section {
-    width: 100%;
-  }
+  @media (min-width: 768px) {
+    .reel-header {
+      margin-bottom: 1.5rem;
+    }
+    
+    .reel-link {
+      font-size: 1.1rem;
+      padding: 0.85rem 1.5rem;
+      width: auto; /* Let it size to content on larger screens */
+      gap: 0.5rem;
+    }
 
-  @media (min-width: 1024px) {
-    .reel-block {
-      padding: 2rem;
+    .reel-container {
+      flex-direction: row;
+    }
+
+    .reel-thumbnail-section,
+    .reel-carousel-section {
+      width: 50%;
+      padding: 0.5rem;
     }
   }
 </style>

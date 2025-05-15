@@ -1,9 +1,10 @@
 ---
 // pages/test-reel.astro
 import Layout from '../layouts/BlogPost.astro';
-import ReelBlock from '../components/ReelBlock.astro';
+import ReelThumbnail from '../components/ReelThumbnail.astro';
 import type { Reel } from '../types';
-
+import ReelBlock from '../components/ReelBlock.astro';
+import ProductCard from '../components/ProductCard.astro';
 const dummyProducts = Array.from({ length: 6 }, (_, i) => ({
   id: `item-${i + 1}`,
   name: `Elegant Gold Ring #${i + 1}`,
@@ -25,11 +26,11 @@ const dummyReel: Reel = {
 };
 ---
 
-<Layout
-  title="Component Test – ReelBlock"
-  description="Testing the ReelBlock component with dummy data"
-  pubDate={new Date('2025-05-11')}
-  heroImage="/blog-placeholder-about.jpg"
->
-  <ReelBlock reel={dummyReel} />
+  <Layout
+    title="Component Test – ReelBlock"
+    description="Testing the ReelBlock component with dummy data"
+    pubDate={new Date('2025-05-11')}
+    heroImage="/blog-placeholder-about.jpg"
+  >
+   <ReelBlock reel={dummyReel} />
 </Layout>

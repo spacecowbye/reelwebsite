@@ -13,55 +13,51 @@ const { reelsData } = Astro.props;
 // Example data structure if none is provided
 const defaultReelsData = [
   {
-    id: "reel-001",
-    title: "Summer Collection 2025",
-    date: "May 5, 2025",
+    dropId: 1,
     reelUrl: "https://www.instagram.com/reel/xyz123",
-    thumbnailSrc: "/images/reels/summer-2025-thumb.jpg",
-    embedCode: "<iframe src='https://www.instagram.com/p/ABC123/embed' allowfullscreen></iframe>",
+    datePosted: "2025-05-05",
+    thumbnail: "/images/reels/summer-2025-thumb.jpg",
+    profileLink: "https://www.instagram.com/deepas_silver_jewelry/",
+    authorName: "deepas_silver_jewelry",
+    profileImage: "/instadp.jpeg",
     products: [
       {
         id: "prod-001",
         name: "Silver Lotus Pendant",
+        imageUrl: "/images/products/lotus-pendant.jpg",
         price: 3500,
-        originalPrice: 3800,
-        currency: "INR", 
-        image: "/images/products/lotus-pendant.jpg",
+        currency: "INR",
         isSoldOut: false
       },
       {
         id: "prod-002",
         name: "Peacock Earrings",
+        imageUrl: "/images/products/peacock-earrings.jpg",
         price: 2800,
-        originalPrice: null,
         currency: "INR",
-        image: "/images/products/peacock-earrings.jpg",
         isSoldOut: true
-      },
-      // More products...
+      }
     ]
   },
   {
-    id: "reel-002",
-    title: "Spring Elegance",
-    date: "April 10, 2025",
+    dropId: 2,
     reelUrl: "https://www.instagram.com/reel/abc456",
-    thumbnailSrc: "/images/reels/spring-elegance-thumb.jpg",
-    embedCode: "<iframe src='https://www.instagram.com/p/DEF456/embed' allowfullscreen></iframe>",
+    datePosted: "2025-04-10",
+    thumbnail: "/images/reels/spring-elegance-thumb.jpg",
+    profileLink: "https://www.instagram.com/deepas_silver_jewelry/",
+    authorName: "deepas_silver_jewelry",
+    profileImage: "/instadp.jpeg",
     products: [
       {
         id: "prod-003",
         name: "Floral Silver Bracelet",
+        imageUrl: "/images/products/floral-bracelet.jpg",
         price: 4200,
-        originalPrice: 4500,
         currency: "INR",
-        image: "/images/products/floral-bracelet.jpg",
         isSoldOut: false
-      },
-      // More products...
+      }
     ]
   }
-  // More reels...
 ];
 
 // Use the provided data or fallback to default
@@ -70,6 +66,12 @@ const reels = reelsData || defaultReelsData;
 
 <section class="reel-section" id="collections">
   <div class="reel-section-container">
+    <div class="reel-intro-block">
+      <h1 class="reel-intro-title">A Living Catalogue of Handcrafted Silver Jewelry</h1>
+      <p class="reel-intro-desc">
+        Welcome to our ever-evolving collection of unique, handcrafted silver jewelry. Every piece you see here is revealed first on our Instagram Reels, and is available only until sold out. Our catalogue is always live, always changing—so if you see something you love, don't wait! 
+      </p>
+    </div>
     <h2 class="reel-section-title">Our Collections</h2>
     <p class="reel-section-description">
       Discover our handcrafted silver jewelry, each piece lovingly made and revealed first on Instagram.
@@ -212,6 +214,40 @@ const reels = reelsData || defaultReelsData;
       right: 20px;
       font-size: 0.75rem;
       padding: 0.2rem 0.75rem;
+    }
+  }
+  
+  .reel-intro-block {
+    max-width: 800px;
+    margin: 0 auto 2.5rem auto;
+    text-align: center;
+    padding: 0 1rem;
+  }
+  .reel-intro-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: #fff;
+    margin-bottom: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+  }
+  .reel-intro-desc {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 1.15rem;
+    color: #e0e0e0;
+    margin-bottom: 0;
+    line-height: 1.7;
+    font-weight: 400;
+  }
+  @media (max-width: 600px) {
+    .reel-intro-title {
+      font-size: 1.3rem;
+    }
+    .reel-intro-desc {
+      font-size: 0.98rem;
+    }
+    .reel-intro-block {
+      margin-bottom: 1.2rem;
     }
   }
 </style>

@@ -2,60 +2,49 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import IntroSection from '../components/IntroSection.astro';
-import ReelSection from '../components/ReelSection.astro';
+import ReelBlock from '../components/ReelBlock.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import type { Reel } from '../types';
+import ReelSection from '../components/ReelSection.astro';
 
-// Example data for the ReelSection component
-const reelsData = [
-	{
-		id: "reel-001",
-		title: "Summer Collection 2025",
-		date: "May 5, 2025",
-		reelUrl: "https://www.instagram.com/reel/xyz123",
-		thumbnailSrc: "/images/reels/summer-2025-thumb.jpg",
-		embedCode: "<iframe src='https://www.instagram.com/p/ABC123/embed' allowfullscreen></iframe>",
-		products: [
-			{
-				id: "prod-001",
-				name: "Silver Lotus Pendant",
-				price: 3500,
-				originalPrice: 3800,
-				currency: "INR", 
-				image: "/images/products/lotus-pendant.jpg",
-				isSoldOut: false
-			},
-			{
-				id: "prod-002",
-				name: "Peacock Earrings",
-				price: 2800,
-				originalPrice: null,
-				currency: "INR",
-				image: "/images/products/peacock-earrings.jpg",
-				isSoldOut: true
-			}
-		]
-	},
-	{
-		id: "reel-002",
-		title: "Spring Elegance",
-		date: "April 10, 2025",
-		reelUrl: "https://www.instagram.com/reel/abc456",
-		thumbnailSrc: "/images/reels/spring-elegance-thumb.jpg",
-		embedCode: "<iframe src='https://www.instagram.com/p/DEF456/embed' allowfullscreen></iframe>",
-		products: [
-			{
-				id: "prod-003",
-				name: "Floral Silver Bracelet",
-				price: 4200,
-				originalPrice: 4500,
-				currency: "INR",
-				image: "/images/products/floral-bracelet.jpg",
-				isSoldOut: false
-			}
-		]
-	}
-];
+const dummyProducts = Array.from({ length: 6 }, (_, i) => ({
+  id: `item-${i + 1}`,
+  name: `Elegant Gold Ring #${i + 1}`,
+  imageUrl: '/testImage.png',
+  price: Math.floor(Math.random() * 10000),
+  currency: 'INR', // Fix: explicitly set currency to 'INR' to match the type
+  isSoldOut: i % 2 === 0, // alternate availability
+}));
+
+const dummyReel: Reel = {
+  dropId: 1,
+  reelUrl: 'https://www.instagram.com/reel/CRW2aLwhgk2/',
+  datePosted: '2025-05-11',
+  thumbnail: '/reel-thumb.jpg',
+  products: dummyProducts,
+  profileLink: 'https://www.instagram.com/deepas_silver_jewelry/',
+  authorName: 'deepas_silver_jewelry',
+  profileImage: '/instadp.jpeg',
+};
+
+const dummyReels = Array.from({ length: 3 }, (_, i) => ({
+  dropId: i + 1,
+  reelUrl: 'https://www.instagram.com/reel/CRW2aLwhgk2/',
+  datePosted: `2025-05-${10 + i}`,
+  thumbnail: '/reel-thumb.jpg',
+  products: Array.from({ length: 6 }, (__, j) => ({
+    id: `item-${i + 1}-${j + 1}`,
+    name: `Elegant Gold Ring #${i * 6 + j + 1}`,
+    imageUrl: '/testImage.png',
+    price: Math.floor(Math.random() * 10000),
+    currency: 'INR',
+    isSoldOut: (j + i) % 2 === 0,
+  })),
+  profileLink: 'https://www.instagram.com/deepas_silver_jewelry/',
+  authorName: 'deepas_silver_jewelry',
+  profileImage: '/instadp.jpeg',
+}));
 ---
 
 <!doctype html>
@@ -68,7 +57,9 @@ const reelsData = [
 		<Header />
 		<IntroSection />
 		<main>
-			<ReelSection reelsData={reelsData} />
+			{dummyReels.map((reel) => (
+				<ReelBlock reel={reel} />
+			))}
 		</main>
 		<Footer />
 	</body>
